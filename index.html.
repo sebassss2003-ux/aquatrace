@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaTrace | Control de pérdidas de agua</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f6f8;
+      color: #173042;
+    }
+    header {
+      background: #123c52;
+      color: white;
+      padding: 24px 7%;
+    }
+    header h1 { margin: 0 0 8px; }
+    header p { margin: 0; color: #d6e8ef; }
+    main { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+    .intro, .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px #17304210;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+    .number { font-size: 30px; font-weight: bold; color: #087e8b; }
+    .tag {
+      display: inline-block;
+      background: #fff0cc;
+      color: #775300;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #e3eaee; }
+    th { color: #537080; font-size: 13px; }
+    .status { color: #a45c00; font-weight: bold; }
+    footer { text-align: center; padding: 25px; color: #607783; font-size: 13px; }
+    @media (max-width: 600px) {
+      table { font-size: 12px; }
+      th, td { padding: 9px 4px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💧 AquaTrace</h1>
+    <p>Detectar pérdidas de agua. Asignar acciones. Verificar resultados.</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <span class="tag">PILOTO · DATOS SIMULADOS</span>
+      <h2>Panel de seguimiento de pérdidas</h2>
+      <p>AquaTrace ayuda al equipo de campo a identificar posibles pérdidas de agua y dar seguimiento hasta verificar su solución.</p>
+    </section>
+
+    <section class="stats">
+      <div class="card">
+        <p>Hogares en el piloto</p>
+        <div class="number">10</div>
+      </div>
+      <div class="card">
+        <p>Alertas por revisar</p>
+        <div class="number">3</div>
+      </div>
+      <div class="card">
+        <p>Casos verificados</p>
+        <div class="number">2</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Casos que necesitan seguimiento</h2>
+      <p>Cada alerta necesita un responsable, una siguiente acción y una fecha de seguimiento.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Caso</th>
+            <th>Señal detectada</th>
+            <th>Estado</th>
+            <th>Siguiente acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AT-001</td>
+            <td>Flujo continuo nocturno</td>
+            <td class="status">Por revisar</td>
+            <td>Programar inspección</td>
+          </tr>
+          <tr>
+            <td>AT-002</td>
+            <td>Consumo inusual</td>
+            <td class="status">En seguimiento</td>
+            <td>Verificar reparación</td>
+          </tr>
+          <tr>
+            <td>AT-003</td>
+            <td>Variación de presión</td>
+            <td class="status">Por revisar</td>
+            <td>Asignar responsable</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Regla del piloto</h2>
+      <p>Una alerta no cuenta como éxito por sí sola. El equipo debe registrar la acción realizada y verificar si la pérdida realmente se resolvió.</p>
+      <p><strong>Principio:</strong> medir soluciones verificadas, no solamente alertas detectadas.</p>
+    </section>
+  </main>
+
+  <footer>
+    AquaTrace · Prototipo académico · Todos los datos son simulados
+  </footer>
+</body>
+</html>

@@ -1,0 +1,46 @@
+
+# AquaTrace — Decision Log
+
+## Project purpose
+AquaTrace is an academic prototype designed to help a field team track possible water losses and follow each case until the result is verified.
+
+## Primary problem
+Detecting a possible loss is not enough. The team needs an owner, a next action, a status, and a follow-up date for every alert.
+
+## Primary user
+The pilot coordinator responsible for monitoring cases across 10 households.
+
+## Pilot scope
+- Track three simulated water-loss cases.
+- Assign a responsible person.
+- Record the next action and follow-up date.
+- Update case status.
+- Distinguish pending, in-progress, verified, and reopened cases.
+- Measure verified resolutions instead of counting alerts alone.
+
+## Technology decisions
+- HTML, CSS, and JavaScript for the prototype.
+- GitHub Pages for public demonstration.
+- Simulated data only; no real household information.
+- No external API keys or backend required for this demonstration.
+
+## IoT and machine learning
+The current interface presents simulated water signals. These signals are not real sensor readings, and the current version does not contain a trained machine-learning model. Any future anomaly-detection demonstration must be clearly labeled as simulated and evaluated before operational use.
+
+## Risks and safeguards
+- An alert without a responsible person may never lead to action.
+- A detected issue must not be counted as resolved until the outcome is verified.
+- Reopened cases and repeat visits must remain visible.
+- If repair capacity is unavailable, the system must document that limitation.
+- People must not be excluded because they lack a smartphone or respond late.
+- Identifiable household information must not be sold.
+- Water savings must not be claimed without verification.
+
+## Success definition
+The prototype succeeds when a coordinator can select a case, record its status, responsible person, next action, and follow-up date, and see the updated case in the dashboard.
+
+## Next steps
+1. Publish the prototype with GitHub Pages.
+2. Test the workflow as a pilot coordinator.
+3. Identify one usability issue and fix it.
+4. Prepare the demo and reflect on limitations.

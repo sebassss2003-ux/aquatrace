@@ -3,72 +3,69 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AquaTrace | Seguimiento de agua</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="./styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f1f6f8; color: #173042; margin: 0; }
+    header { background: #123c52; color: white; padding: 24px 7%; }
+    main { max-width: 1000px; margin: 28px auto; padding: 0 18px; }
+    .card { background: white; border: 1px solid #dce7eb; border-radius: 12px; padding: 20px; margin-bottom: 18px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 14px; }
+    .number { color: #087e8b; font-size: 30px; font-weight: bold; }
+    .tag { background: #e4f6f2; color: #08675d; border-radius: 20px; padding: 6px 10px; font-size: 12px; }
+    .notice { background: #edf7f8; padding: 12px; border-left: 4px solid #087e8b; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 12px 8px; border-bottom: 1px solid #e0e9ed; }
+    input, select { width: 100%; padding: 11px; margin: 5px 0 14px; border: 1px solid #bdcdd4; border-radius: 6px; box-sizing: border-box; }
+    label { display: block; font-weight: bold; }
+    button { padding: 12px 16px; color: white; background: #087e8b; border: 0; border-radius: 7px; cursor: pointer; margin-right: 8px; }
+    footer { text-align: center; padding: 22px; color: #607783; }
+    .table-wrap { overflow-x: auto; }
+  </style>
 </head>
 <body>
 <header>
-  <div class="header-content">
-    <div>
-      <h1>💧 AquaTrace</h1>
-      <p>Detectar pérdidas. Coordinar acciones. Verificar soluciones.</p>
-    </div>
-    <span class="tag">PILOTO SIMULADO</span>
-  </div>
+  <h1>💧 AquaTrace</h1>
+  <p>Detectar pérdidas. Coordinar acciones. Verificar soluciones.</p>
+  <span class="tag">PILOTO SIMULADO</span>
 </header>
 
 <main>
-  <section class="intro">
+  <section class="card">
     <h2>Panel de seguimiento</h2>
-    <p>Controla las alertas de posibles pérdidas de agua y acompaña cada caso hasta verificar su solución.</p>
-    <p class="notice">Datos inventados para una demostración académica.</p>
+    <p>Seguimiento de posibles pérdidas de agua para un piloto de 10 hogares.</p>
+    <p class="notice">Todos los registros son inventados. No son mediciones reales.</p>
   </section>
 
   <section class="stats">
-    <article class="card">
-      <p>Hogares del piloto</p>
-      <div class="number">10</div>
-    </article>
-    <article class="card">
-      <p>Casos pendientes</p>
-      <div class="number" id="pendingCount">0</div>
-    </article>
-    <article class="card">
-      <p>Soluciones verificadas</p>
-      <div class="number" id="verifiedCount">0</div>
-    </article>
+    <article class="card"><p>Hogares del piloto</p><div class="number">10</div></article>
+    <article class="card"><p>Casos pendientes</p><div class="number" id="pendingCount">2</div></article>
+    <article class="card"><p>Soluciones verificadas</p><div class="number" id="verifiedCount">1</div></article>
   </section>
 
   <section class="card">
     <h2>Alertas de agua</h2>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Caso</th>
-            <th>Señal detectada</th>
-            <th>Estado</th>
-            <th>Responsable</th>
-            <th>Siguiente acción</th>
-            <th>Fecha</th>
-          </tr>
-        </thead>
-        <tbody id="casesTable"></tbody>
+        <thead><tr><th>Caso</th><th>Señal</th><th>Estado</th><th>Responsable</th><th>Siguiente acción</th><th>Fecha</th></tr></thead>
+        <tbody id="casesTable">
+          <tr><td>AT-001</td><td>Flujo nocturno continuo</td><td>Por revisar</td><td>Equipo de campo</td><td>Inspeccionar posible fuga</td><td>Sin fecha</td></tr>
+          <tr><td>AT-002</td><td>Consumo inusual</td><td>En seguimiento</td><td>Coordinación</td><td>Verificar reparación</td><td>Sin fecha</td></tr>
+          <tr><td>AT-003</td><td>Variación de presión</td><td>Verificado</td><td>Equipo de campo</td><td>Revisar nuevamente</td><td>Sin fecha</td></tr>
+        </tbody>
       </table>
     </div>
   </section>
 
-  <section class="card detail-card">
+  <section class="card">
     <h2>Registrar seguimiento</h2>
-
     <label for="caseSelect">Caso</label>
     <select id="caseSelect">
       <option value="AT-001">AT-001 — Flujo nocturno</option>
       <option value="AT-002">AT-002 — Consumo inusual</option>
       <option value="AT-003">AT-003 — Variación de presión</option>
     </select>
-
     <label for="statusSelect">Estado</label>
     <select id="statusSelect">
       <option value="pending">Por revisar</option>
@@ -76,25 +73,20 @@
       <option value="verified">Solución verificada</option>
       <option value="reopened">Reabierto</option>
     </select>
-
-    <label for="actionInput">Siguiente acción</label>
-    <input id="actionInput" type="text" placeholder="Ej. Programar inspección">
-
     <label for="ownerInput">Responsable</label>
-    <input id="ownerInput" type="text" placeholder="Ej. Equipo de campo">
-
+    <input id="ownerInput" placeholder="Ej. Equipo de campo">
+    <label for="actionInput">Siguiente acción</label>
+    <input id="actionInput" placeholder="Ej. Programar inspección">
     <label for="dateInput">Fecha de seguimiento</label>
     <input id="dateInput" type="date">
-
     <button id="saveButton" type="button">Guardar seguimiento</button>
-    <button id="resetButton" type="button">Restablecer datos de ejemplo</button>
-    <p id="feedback" role="status" aria-live="polite"></p>
-    <p class="small">Los cambios se guardan en este navegador y dispositivo. No se sincronizan con otros usuarios.</p>
+    <p id="feedback" role="status"></p>
+    <p>Los cambios se guardan en este navegador y dispositivo.</p>
   </section>
 
   <section class="card">
     <h2>¿Cómo medimos el éxito?</h2>
-    <p>Una alerta no equivale a una solución. Hay que registrar la acción, verificar el resultado y dar seguimiento para identificar si el problema vuelve.</p>
+    <p>Una alerta no equivale a una solución. Hay que registrar la acción, verificar el resultado y comprobar si el problema vuelve.</p>
     <strong>Medimos soluciones verificadas, no solamente alertas detectadas.</strong>
   </section>
 </main>
@@ -102,142 +94,87 @@
 <footer>AquaTrace · Prototipo académico · Datos simulados</footer>
 
 <script>
-const STORAGE_KEY = "aquatrace_cases_v1";
-
-const defaults = {
-  "AT-001": {
-    signal: "Flujo nocturno continuo",
-    status: "pending",
-    owner: "Equipo de campo",
-    action: "Inspeccionar posible fuga",
-    date: ""
-  },
-  "AT-002": {
-    signal: "Consumo inusual",
-    status: "progress",
-    owner: "Coordinación",
-    action: "Verificar reparación",
-    date: ""
-  },
-  "AT-003": {
-    signal: "Variación de presión",
-    status: "verified",
-    owner: "Equipo de campo",
-    action: "Revisar nuevamente",
-    date: ""
-  }
-};
-
-let cases = loadCases();
-
-function loadCases() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? { ...structuredClone(defaults), ...JSON.parse(saved) }
-                 : structuredClone(defaults);
-  } catch {
-    return structuredClone(defaults);
-  }
-}
-
-const caseSelect = document.getElementById("caseSelect");
-const statusSelect = document.getElementById("statusSelect");
-const actionInput = document.getElementById("actionInput");
-const ownerInput = document.getElementById("ownerInput");
-const dateInput = document.getElementById("dateInput");
-const feedback = document.getElementById("feedback");
-
-const labels = {
-  pending: ["Por revisar", "pending"],
-  progress: ["En seguimiento", "progress"],
-  verified: ["Verificado", "verified"],
-  reopened: ["Reabierto", "reopened"]
-};
-
-function renderCases() {
-  const table = document.getElementById("casesTable");
-  table.replaceChildren();
-  let pending = 0;
-  let verified = 0;
-
-  Object.entries(cases).forEach(([id, item]) => {
-    const row = document.createElement("tr");
-    const values = [
-      id, item.signal, labels[item.status][0],
-      item.owner, item.action, item.date || "Sin fecha"
-    ];
-
-    values.forEach((value, index) => {
-      const cell = document.createElement("td");
-      if (index === 2) {
-        const badge = document.createElement("span");
-        badge.className = "status " + labels[item.status][1];
-        badge.textContent = value;
-        cell.appendChild(badge);
-      } else {
-        cell.textContent = value;
-      }
-      row.appendChild(cell);
-    });
-
-    table.appendChild(row);
-    if (item.status === "pending" || item.status === "reopened") pending++;
-    if (item.status === "verified") verified++;
-  });
-
-  document.getElementById("pendingCount").textContent = pending;
-  document.getElementById("verifiedCount").textContent = verified;
-}
-
-function loadSelectedCase() {
-  const item = cases[caseSelect.value];
-  statusSelect.value = item.status;
-  actionInput.value = item.action;
-  ownerInput.value = item.owner;
-  dateInput.value = item.date;
-  feedback.textContent = "";
-}
-
-document.getElementById("saveButton").addEventListener("click", () => {
-  const id = caseSelect.value;
-
-  if (!actionInput.value.trim() || !ownerInput.value.trim() || !dateInput.value) {
-    feedback.textContent = "Completa la acción, el responsable y la fecha.";
-    return;
-  }
-
-  cases[id] = {
-    ...cases[id],
-    status: statusSelect.value,
-    action: actionInput.value.trim(),
-    owner: ownerInput.value.trim(),
-    date: dateInput.value
+(function () {
+  const key = "aquatrace_cases_v1";
+  const initial = {
+    "AT-001": { status: "pending", owner: "Equipo de campo", action: "Inspeccionar posible fuga", date: "" },
+    "AT-002": { status: "progress", owner: "Coordinación", action: "Verificar reparación", date: "" },
+    "AT-003": { status: "verified", owner: "Equipo de campo", action: "Revisar nuevamente", date: "" }
   };
 
+  let records = initial;
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cases));
-    renderCases();
-    feedback.textContent = "Seguimiento guardado correctamente para " + id + ".";
-  } catch {
-    feedback.textContent = "No se pudo guardar. Comprueba la configuración del navegador.";
-  }
-});
+    const saved = localStorage.getItem(key);
+    if (saved) records = Object.assign({}, initial, JSON.parse(saved));
+  } catch (error) {}
 
-document.getElementById("resetButton").addEventListener("click", () => {
-  cases = structuredClone(defaults);
-  try {
-    localStorage.removeItem(STORAGE_KEY);
-    renderCases();
-    loadSelectedCase();
-    feedback.textContent = "Datos de ejemplo restablecidos.";
-  } catch {
-    feedback.textContent = "No se pudo restablecer el almacenamiento local.";
-  }
-});
+  const caseSelect = document.getElementById("caseSelect");
+  const statusSelect = document.getElementById("statusSelect");
+  const ownerInput = document.getElementById("ownerInput");
+  const actionInput = document.getElementById("actionInput");
+  const dateInput = document.getElementById("dateInput");
+  const feedback = document.getElementById("feedback");
 
-caseSelect.addEventListener("change", loadSelectedCase);
-renderCases();
-loadSelectedCase();
+  function loadCase() {
+    const item = records[caseSelect.value];
+    statusSelect.value = item.status;
+    ownerInput.value = item.owner;
+    actionInput.value = item.action;
+    dateInput.value = item.date;
+  }
+
+  function render() {
+    const table = document.getElementById("casesTable");
+    table.replaceChildren();
+    let pending = 0, verified = 0;
+    const statusNames = { pending: "Por revisar", progress: "En seguimiento", verified: "Verificado", reopened: "Reabierto" };
+
+    Object.keys(records).forEach(function (id) {
+      const item = records[id];
+      const row = table.insertRow();
+      [id, item.status, item.owner, item.action, item.date || "Sin fecha"].forEach(function (value, index) {
+        const cell = row.insertCell();
+        cell.textContent = index === 1 ? (statusNames[value] || value) : value;
+      });
+      row.cells[1].textContent = statusNames[item.status] || item.status;
+      row.insertCell(1).textContent = ({
+        "AT-001": "Flujo nocturno continuo",
+        "AT-002": "Consumo inusual",
+        "AT-003": "Variación de presión"
+      })[id] || "Señal simulada";
+
+      if (item.status === "pending" || item.status === "reopened") pending++;
+      if (item.status === "verified") verified++;
+    });
+
+    document.getElementById("pendingCount").textContent = pending;
+    document.getElementById("verifiedCount").textContent = verified;
+  }
+
+  caseSelect.addEventListener("change", loadCase);
+  document.getElementById("saveButton").addEventListener("click", function () {
+    if (!ownerInput.value.trim() || !actionInput.value.trim() || !dateInput.value) {
+      feedback.textContent = "Completa responsable, siguiente acción y fecha.";
+      return;
+    }
+    records[caseSelect.value] = {
+      status: statusSelect.value,
+      owner: ownerInput.value.trim(),
+      action: actionInput.value.trim(),
+      date: dateInput.value
+    };
+    try {
+      localStorage.setItem(key, JSON.stringify(records));
+      feedback.textContent = "Seguimiento guardado para " + caseSelect.value + ".";
+    } catch (error) {
+      feedback.textContent = "No se pudo guardar en este navegador.";
+    }
+    render();
+  });
+
+  loadCase();
+  render();
+})();
 </script>
 </body>
 </html>

@@ -4,127 +4,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AquaTrace | Control de pérdidas de agua</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f6f8;
-      color: #173042;
-    }
-    header {
-      background: #123c52;
-      color: white;
-      padding: 24px 7%;
-    }
-    header h1 { margin: 0 0 8px; }
-    header p { margin: 0; color: #d6e8ef; }
-    main { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-    .intro, .card {
-      background: white;
-      padding: 22px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 12px #17304210;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-    }
-    .number { font-size: 30px; font-weight: bold; color: #087e8b; }
-    .tag {
-      display: inline-block;
-      background: #fff0cc;
-      color: #775300;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 12px;
-    }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #e3eaee; }
-    th { color: #537080; font-size: 13px; }
-    .status { color: #a45c00; font-weight: bold; }
-    footer { text-align: center; padding: 25px; color: #607783; font-size: 13px; }
-    @media (max-width: 600px) {
-      table { font-size: 12px; }
-      th, td { padding: 9px 4px; }
-    }
-  </style>
+  <meta name="description" content="AquaTrace: seguimiento y verificación de posibles pérdidas de agua.">
+  <title>AquaTrace | Seguimiento de agua</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>💧 AquaTrace</h1>
-    <p>Detectar pérdidas de agua. Asignar acciones. Verificar resultados.</p>
+    <div class="header-content">
+      <div>
+        <h1>💧 AquaTrace</h1>
+        <p>Detectar pérdidas. Coordinar acciones. Verificar soluciones.</p>
+      </div>
+      <span class="tag">PILOTO SIMULADO</span>
+    </div>
   </header>
 
   <main>
     <section class="intro">
-      <span class="tag">PILOTO · DATOS SIMULADOS</span>
-      <h2>Panel de seguimiento de pérdidas</h2>
-      <p>AquaTrace ayuda al equipo de campo a identificar posibles pérdidas de agua y dar seguimiento hasta verificar su solución.</p>
+      <h2>Panel de seguimiento</h2>
+      <p>Controla las alertas de posibles pérdidas de agua y acompaña cada caso hasta verificar su solución.</p>
+      <p class="notice">Los datos de esta demostración son inventados y no representan mediciones reales.</p>
     </section>
 
     <section class="stats">
-      <div class="card">
-        <p>Hogares en el piloto</p>
+      <article class="card">
+        <p>Hogares del piloto</p>
         <div class="number">10</div>
-      </div>
-      <div class="card">
-        <p>Alertas por revisar</p>
-        <div class="number">3</div>
-      </div>
-      <div class="card">
-        <p>Casos verificados</p>
-        <div class="number">2</div>
-      </div>
+      </article>
+      <article class="card">
+        <p>Casos pendientes</p>
+        <div class="number" id="pendingCount">2</div>
+      </article>
+      <article class="card">
+        <p>Soluciones verificadas</p>
+        <div class="number" id="verifiedCount">1</div>
+      </article>
     </section>
 
     <section class="card">
-      <h2>Casos que necesitan seguimiento</h2>
-      <p>Cada alerta necesita un responsable, una siguiente acción y una fecha de seguimiento.</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Caso</th>
-            <th>Señal detectada</th>
-            <th>Estado</th>
-            <th>Siguiente acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>AT-001</td>
-            <td>Flujo continuo nocturno</td>
-            <td class="status">Por revisar</td>
-            <td>Programar inspección</td>
-          </tr>
-          <tr>
-            <td>AT-002</td>
-            <td>Consumo inusual</td>
-            <td class="status">En seguimiento</td>
-            <td>Verificar reparación</td>
-          </tr>
-          <tr>
-            <td>AT-003</td>
-            <td>Variación de presión</td>
-            <td class="status">Por revisar</td>
-            <td>Asignar responsable</td>
-          </tr>
-        </tbody>
-      </table>
+      <h2>Alertas de agua</h2>
+      <p>Selecciona un caso para consultar sus detalles y registrar el seguimiento.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Caso</th>
+              <th>Señal detectada</th>
+              <th>Estado</th>
+              <th>Responsable</th>
+              <th>Seguimiento</th>
+            </tr>
+          </thead>
+          <tbody id="casesTable">
+            <tr>
+              <td>AT-001</td>
+              <td>Flujo nocturno continuo</td>
+              <td><span class="status pending">Por revisar</span></td>
+              <td>Equipo de campo</td>
+              <td>Inspeccionar posible fuga</td>
+            </tr>
+            <tr>
+              <td>AT-002</td>
+              <td>Consumo inusual</td>
+              <td><span class="status progress">En seguimiento</span></td>
+              <td>Coordinación</td>
+              <td>Verificar reparación</td>
+            </tr>
+            <tr>
+              <td>AT-003</td>
+              <td>Variación de presión</td>
+              <td><span class="status verified">Verificado</span></td>
+              <td>Equipo de campo</td>
+              <td>Revisar nuevamente en 7 días</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card detail-card">
+      <h2>Registrar seguimiento</h2>
+      <label for="caseSelect">Selecciona el caso</label>
+      <select id="caseSelect">
+        <option value="AT-001">AT-001 — Flujo nocturno</option>
+        <option value="AT-002">AT-002 — Consumo inusual</option>
+        <option value="AT-003">AT-003 — Variación de presión</option>
+      </select>
+
+      <label for="statusSelect">Nuevo estado</label>
+      <select id="statusSelect">
+        <option value="pending">Por revisar</option>
+        <option value="progress">En seguimiento</option>
+        <option value="verified">Solución verificada</option>
+        <option value="reopened">Reabierto</option>
+      </select>
+
+      <label for="actionInput">Siguiente acción</label>
+      <input id="actionInput" type="text" placeholder="Ej. Programar inspección">
+
+      <label for="ownerInput">Responsable</label>
+      <input id="ownerInput" type="text" placeholder="Ej. Equipo de campo">
+
+      <label for="dateInput">Fecha de seguimiento</label>
+      <input id="dateInput" type="date">
+
+      <button id="saveButton" type="button">Guardar seguimiento</button>
+      <p id="feedback" role="status" aria-live="polite"></p>
+      <p class="small">Este prototipo guarda los cambios solo durante la sesión actual del navegador.</p>
     </section>
 
     <section class="card">
-      <h2>Regla del piloto</h2>
-      <p>Una alerta no cuenta como éxito por sí sola. El equipo debe registrar la acción realizada y verificar si la pérdida realmente se resolvió.</p>
-      <p><strong>Principio:</strong> medir soluciones verificadas, no solamente alertas detectadas.</p>
+      <h2>¿Cómo medimos el éxito?</h2>
+      <p>Una alerta no equivale a una solución. El éxito requiere registrar la acción, verificar el resultado y dar seguimiento para detectar si el problema vuelve.</p>
+      <p><strong>Regla:</strong> medir soluciones verificadas, no solamente alertas detectadas.</p>
     </section>
   </main>
 
-  <footer>
-    AquaTrace · Prototipo académico · Todos los datos son simulados
-  </footer>
+  <footer>AquaTrace · Prototipo académico · Datos simulados · Sin información personal real</footer>
+
+  <script>
+    const cases = {
+      "AT-001": {
+        signal: "Flujo nocturno continuo",
+        status: "pending",
+        owner: "Equipo de campo",
+        action: "Inspeccionar posible fuga",
+        date: ""
+      },
+      "AT-002": {
+        signal: "Consumo inusual",
+        status: "progress",
+        owner: "Coordinación",
+        action: "Verificar reparación",
+        date: ""
+      },
+      "AT-003": {
+        signal: "Variación de presión",
+        status: "verified",
+        owner: "Equipo de campo",
+        action: "Revisar nuevamente en 7 días",
+        date: ""
+      }
+    };
+
+    const caseSelect = document.getElementById("caseSelect");
+    const statusSelect = document.getElementById("statusSelect");
+    const actionInput = document.getElementById("actionInput");
+    const ownerInput = document.getElementById("ownerInput");
+    const dateInput = document.getElementById("dateInput");
+    const feedback = document.getElementById("feedback");
+
+    function loadCase() {
+      const item = cases[caseSelect.value];
+      statusSelect.value = item.status;
+      actionInput.value = item.action;
+      ownerInput.value = item.owner;
+      dateInput.value = item.date;
+      feedback.textContent = "";
+    }
+
+    function renderCases() {
+      const rows = document.querySelectorAll("#casesTable tr");
+      let pending = 0;
+      let verified = 0;
+
+      rows.forEach((row) => {
+        const id = row.cells[0].textContent;
+        const item = cases[id];
+        const labels = {
+          pending: ["Por revisar", "pending"],
+          progress: ["En seguimiento", "progress"],
+          verified: ["Verificado", "verified"],
+          reopened: ["Reabierto", "reopened"]
+        };
+
+        row.cells[2].innerHTML =
+          '<span class="status ' + labels[item.status][1] + '">' +
+          labels[item.status][0] + '</span>';
+        row.cells[3].textContent = item.owner;
+        row.cells[4].textContent = item.action;
+
+        if (item.status === "pending" || item.status === "reopened") pending++;
+        if (item.status === "verified") verified++;
+      });
+
+      document.getElementById("pendingCount").textContent = pending;
+      document.getElementById("verifiedCount").textContent = verified;
+    }
+
+    document.getElementById("saveButton").addEventListener("click", () => {
+      const id = caseSelect.value;
+
+      if (!actionInput.value.trim() || !ownerInput.value.trim() || !dateInput.value) {
+        feedback.textContent = "Completa la siguiente acción, el responsable y la fecha.";
+        return;
+      }
+
+      cases[id].status = statusSelect.value;
+      cases[id].action = actionInput.value.trim();
+      cases[id].owner = ownerInput.value.trim();
+      cases[id].date = dateInput.value;
+
+      renderCases();
+      feedback.textContent = "Seguimiento actualizado para " + id + ".";
+    });
+
+    caseSelect.addEventListener("change", loadCase);
+    renderCases();
+    loadCase();
+  </script>
 </body>
 </html>
